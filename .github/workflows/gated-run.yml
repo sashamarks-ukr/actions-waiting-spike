@@ -1,0 +1,13 @@
+name: Gated Run
+on: workflow_dispatch
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "JOB1 did some work $(date -u +%T)"
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    environment: gated
+    steps:
+      - run: echo "JOB2 approved $(date -u +%T)"
